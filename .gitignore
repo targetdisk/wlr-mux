@@ -1,3 +1,6 @@
+*.o
+compile_commands.json
+
 proto/*-protocol.c
 proto/*-client-protocol.h
 wlr-mux

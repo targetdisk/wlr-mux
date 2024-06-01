@@ -1,13 +1,17 @@
 LIBS := wayland-client wayland-protocols
 
 CFLAGS ?= -Wall
-CFLAGS += $(shell pkg-config --libs $(LIBS)) -I$(CURDIR)/proto
+CFLAGS += $(shell pkg-config --libs $(LIBS)) -I$(CURDIR)/proto\
+	  -I$(CURDIR)/include
 
 PROTOS := $(basename $(wildcard proto/*.xml))
 PROTO_DEPS := $(foreach \
 	      PROTO,$(PROTOS),$(PROTO)-protocol.c $(PROTO)-client-protocol.h)
 
-wlr-mux: main.c $(PROTO_DEPS)
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+wlr-mux: $(PROTO_DEPS) event.o wayland.o main.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 proto/%-client-protocol.h: proto/%.xml
