@@ -1,0 +1,3 @@
+[submodule "modules/wlr-protocols"]
+	path = modules/wlr-protocols
+	url = https://gitlab.freedesktop.org/wlroots/wlr-protocols.git
