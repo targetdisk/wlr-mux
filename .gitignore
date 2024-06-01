@@ -1,0 +1,3 @@
+proto/*-protocol.c
+proto/*-client-protocol.h
+wlr-mux
